@@ -1,0 +1,33 @@
+{
+  "name": "megatron",
+  "version": "1.0.0",
+  "description": "MEGATRON — an evidence-first autonomous engineering workbench.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "mg": "./bin/mg.js"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "test": "node scripts/test.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test",
+    "demo": "node demo/run-demo.mjs",
+    "bench": "node bin/mg.js bench",
+    "serve": "node bin/mg.js serve",
+    "start": "node bin/mg.js serve",
+    "test:e2e": "playwright test",
+    "assets": "node scripts/capture-assets.mjs",
+    "package": "node scripts/package.mjs"
+  },
+  "keywords": ["agent", "autonomous", "coding-agent", "orchestration", "evidence", "evals"],
+  "author": "MEGATRON contributors",
+  "files": ["bin", "src", "web", "demo", "assets", "docs", "scripts", "LICENSE", "README.md"],
+  "devDependencies": {
+    "@playwright/test": "^1.58.0",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.0"
+  }
+}

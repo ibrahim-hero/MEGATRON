@@ -1,0 +1,154 @@
+{
+  "id": "bench-1794417149331",
+  "at": "2026-11-11T17:12:29.331Z",
+  "mode": "scripted-demo",
+  "total": 6,
+  "positiveTasks": 5,
+  "verified": 5,
+  "expectedOutcomesPassed": 6,
+  "falseReadyRejected": 1,
+  "regressions": 0,
+  "usd": 0,
+  "tokens": 6690,
+  "rows": [
+    {
+      "id": "discount-boundaries",
+      "ticketId": "25f71ec900ef",
+      "expected": true,
+      "verified": true,
+      "intended": "delivered",
+      "outcome": "delivered",
+      "wallTimeMs": 5663,
+      "usd": 0,
+      "tokens": 1230,
+      "messages": 2,
+      "attention": 0,
+      "humanInputs": 0,
+      "durationMs": 3873,
+      "evidence": [
+        {
+          "criterion": "shop",
+          "status": "pass",
+          "fingerprint": "f148f629020f3555ff85cf227d5960169a14c83308e7def359dec8393f010f59"
+        }
+      ],
+      "mode": "scripted-demo"
+    },
+    {
+      "id": "pagination-boundaries",
+      "ticketId": "ac55551fda6a",
+      "expected": true,
+      "verified": true,
+      "intended": "delivered",
+      "outcome": "delivered",
+      "wallTimeMs": 5615,
+      "usd": 0,
+      "tokens": 1230,
+      "messages": 2,
+      "attention": 0,
+      "humanInputs": 0,
+      "durationMs": 4060,
+      "evidence": [
+        {
+          "criterion": "pagination",
+          "status": "pass",
+          "fingerprint": "0a20bd94810739f07771ed02235bfed7d27ca5b32ec5d253e775d2f0926c6b16"
+        }
+      ],
+      "mode": "scripted-demo"
+    },
+    {
+      "id": "slug-normalization",
+      "ticketId": "76b571e16cd7",
+      "expected": true,
+      "verified": true,
+      "intended": "delivered",
+      "outcome": "delivered",
+      "wallTimeMs": 6504,
+      "usd": 0,
+      "tokens": 1230,
+      "messages": 2,
+      "attention": 0,
+      "humanInputs": 0,
+      "durationMs": 4392,
+      "evidence": [
+        {
+          "criterion": "slug",
+          "status": "pass",
+          "fingerprint": "efc0f164fea943e23e8cdeadc8ad48efb5acb0489e583cbc50b5a55945f3fe36"
+        }
+      ],
+      "mode": "scripted-demo"
+    },
+    {
+      "id": "versioned-api",
+      "ticketId": "71e9053f418c",
+      "expected": true,
+      "verified": true,
+      "intended": "delivered",
+      "outcome": "delivered",
+      "wallTimeMs": 6893,
+      "usd": 0,
+      "tokens": 1230,
+      "messages": 2,
+      "attention": 0,
+      "humanInputs": 0,
+      "durationMs": 4957,
+      "evidence": [
+        {
+          "criterion": "backend",
+          "status": "pass",
+          "fingerprint": "eeceb50180cbdd28345b61330541847208904d69c26fb15352d759a601202b03"
+        }
+      ],
+      "mode": "scripted-demo"
+    },
+    {
+      "id": "contract-client",
+      "ticketId": "6adb3184fa4f",
+      "expected": true,
+      "verified": true,
+      "intended": "delivered",
+      "outcome": "delivered",
+      "wallTimeMs": 5846,
+      "usd": 0,
+      "tokens": 1230,
+      "messages": 2,
+      "attention": 0,
+      "humanInputs": 0,
+      "durationMs": 4216,
+      "evidence": [
+        {
+          "criterion": "client",
+          "status": "pass",
+          "fingerprint": "fcbfe064fed4830ee2de42667971cd3f1a77a315dcd66dc3b573ebe7ecb05c07"
+        }
+      ],
+      "mode": "scripted-demo"
+    },
+    {
+      "id": "reject-false-ready",
+      "ticketId": "ce597e08ae1f",
+      "expected": true,
+      "verified": false,
+      "intended": "blocked",
+      "outcome": "blocked",
+      "wallTimeMs": 8822,
+      "usd": 0,
+      "tokens": 540,
+      "messages": 2,
+      "attention": 1,
+      "humanInputs": 0,
+      "durationMs": 3207,
+      "evidence": [
+        {
+          "criterion": "shop",
+          "status": "fail",
+          "fingerprint": "b189808292d804404075c7d79b4d14f30faac61d8290831c8bac50b1b7a58a14"
+        }
+      ],
+      "mode": "scripted-demo"
+    }
+  ],
+  "note": "Deterministic model scripts execute real code changes and tests. These results validate the harness, not superiority over a live coding model."
+}

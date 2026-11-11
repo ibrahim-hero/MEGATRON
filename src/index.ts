@@ -1,0 +1,12 @@
+/** Barrel: engine + its ports in one import site. */
+export * from "./core/ports.ts"
+export * from "./core/model.ts"
+export * from "./core/stage.ts"
+export * from "./core/ids.ts"
+export * from "./core/errors.ts"
+export * from "./policy.ts"
+export * from "./engine.ts"
+export * from "./effects.ts"
+export * from "./outbox.ts"
+export * from "./evidence.ts"
+export * from "./ledger.ts"

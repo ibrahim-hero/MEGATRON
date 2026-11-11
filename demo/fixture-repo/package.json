@@ -1,0 +1,1 @@
+{"name":"megatron-shop-fixture","private":true,"type":"module","scripts":{"test":"node --test test/cart.test.js"}}

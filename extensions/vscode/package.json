@@ -1,0 +1,19 @@
+{
+  "name":"megatron-mission-control","displayName":"MEGATRON Mission Control","description":"Inspect evidence-first agent missions, review changes, and decide delivery gates.",
+  "version":"1.0.0","publisher":"megatron","engines":{"vscode":"^1.95.0"},"license":"MIT",
+  "categories":["Other"],"activationEvents":["onView:megatron.missions"],"main":"./extension.cjs",
+  "contributes":{
+    "viewsContainers":{"activitybar":[{"id":"megatron","title":"MEGATRON","icon":"icon.svg"}]},
+    "views":{"megatron":[{"id":"megatron.missions","name":"Missions"}]},
+    "commands":[
+      {"command":"megatron.refresh","title":"MEGATRON: Refresh Missions"},
+      {"command":"megatron.openConsole","title":"MEGATRON: Open Mission Control"},
+      {"command":"megatron.newMission","title":"MEGATRON: New Mission"},
+      {"command":"megatron.review","title":"MEGATRON: Review Mission Changes"},
+      {"command":"megatron.approve","title":"MEGATRON: Approve Delivery"},
+      {"command":"megatron.connect","title":"MEGATRON: Set Server Token"}
+    ],
+    "configuration":{"title":"MEGATRON","properties":{"megatron.url":{"type":"string","default":"http://127.0.0.1:3082","description":"URL of your running MEGATRON instance."}}},
+    "menus":{"view/title":[{"command":"megatron.refresh","when":"view == megatron.missions","group":"navigation"}],"view/item/context":[{"command":"megatron.approve","when":"view == megatron.missions && viewItem == pendingApproval","group":"inline"}]}
+  }
+}

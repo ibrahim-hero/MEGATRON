@@ -1,0 +1,21 @@
+// Run after gh auth login. This script publishes the new repository explicitly requested by the operator.
+import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
+import { resolve, join } from 'node:path';
+import { githubEnvironment } from './github-auth.mjs';
+const root=resolve('.');const portable=join(root,'tools/github/bin/gh.exe');const gh=process.env.MEGATRON_GH??(existsSync(portable)?portable:'gh');
+const env=githubEnvironment(gh,{...process.env,...(existsSync(portable)?{GH_CONFIG_DIR:join(root,'tools/github/config')}:{})});
+const run=(program,args,options={})=>{const r=spawnSync(program,args,{cwd:root,env,encoding:'utf8',...options});if(r.status!==0)throw new Error(r.stderr||`${program} failed`);return r.stdout;};
+const auth=spawnSync(gh,['auth','status'],{cwd:root,env,encoding:'utf8'});if(auth.status!==0)throw new Error('Authenticate the GitHub CLI in your terminal first. No repository was created or pushed.');
+const owner=JSON.parse(run(gh,['api','user']));const repo=`${owner.login}/MEGATRON`;
+const existing=spawnSync(gh,['repo','view',repo,'--json','name'],{cwd:root,env,encoding:'utf8'});if(existing.status===0)throw new Error(`${repo} already exists. Publication was stopped to avoid overwriting another repository.`);
+console.log(run('git',['status','--short']));console.log(run('git',['diff','--stat']));
+const log=spawnSync('git',['log','--oneline','-10'],{cwd:root,env,encoding:'utf8'});if(log.status===0)console.log(log.stdout);
+const files=['src','bin','web','assets','docs','demo/fixtures','demo/fixture-repo','demo/run-demo.mjs','demo/README.md','tests','extensions','scripts','.github','LICENSE','README.md','package.json','package-lock.json','.gitignore','.gitattributes','.env.example','tsconfig.json','playwright.config.ts'];
+run('git',['add','--',...files]);run('git',['diff','--cached','--check']);console.log(run('git',['diff','--cached','--stat']));
+const commitEnv={...env,GIT_AUTHOR_NAME:owner.login,GIT_COMMITTER_NAME:owner.login,GIT_AUTHOR_EMAIL:`${owner.id}+${owner.login}@users.noreply.github.com`,GIT_COMMITTER_EMAIL:`${owner.id}+${owner.login}@users.noreply.github.com`};
+run('git',['commit','-m','feat: launch MEGATRON evidence-first engineering workbench'],{env:commitEnv,stdio:'inherit'});
+run('git',['branch','-M','main']);run(gh,['repo','create','MEGATRON','--public','--description','Evidence-first autonomous engineering: verified delivery, durable workflows, project intelligence, and Mission Control.','--source',root,'--remote','origin'],{stdio:'inherit'});
+const helper=`!"${gh.replaceAll('\\','/')}" auth git-credential`;
+run('git',['-c','credential.helper=','-c',`credential.helper=${helper}`,'push','-u','origin','main'],{stdio:'inherit'});
+console.log(`Published https://github.com/${repo}`);

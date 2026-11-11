@@ -1,0 +1,16 @@
+{
+  "product": "MEGATRON",
+  "version": "1.0.0",
+  "checkedOn": "2026-11-11",
+  "environment": "Windows; Node.js 24.16.0; installed Microsoft Edge",
+  "checks": [
+    {"command":"npm.cmd run typecheck","result":"passed"},
+    {"command":"npm.cmd test","result":"passed","tests":39,"failed":0,"skipped":0},
+    {"command":"npm.cmd run test:e2e","result":"passed","scenarios":6},
+    {"command":"node bin/mg.js bench --demo --state tools/final-benchmark --json","result":"passed","expectedOutcomes":6,"verifiedPositiveTasks":5,"positiveTasks":5,"falseReadyRejected":1,"observedRegressions":0},
+    {"command":"node demo/run-demo.mjs","result":"passed","covers":["verified patch","approval","immutable delivery","false-ready rejection","speculative candidate selection"]}
+  ],
+  "benchmarkMode": "scripted-demo with real file changes and executed tests",
+  "liveProviderQuality": "Requires a configured provider and a separate measured run",
+  "remoteAndContainerPrerequisites": "Authenticated GitHub/Feishu integrations and an installed Docker engine/image are external operating prerequisites. Their contracts are covered by the local suite."
+}

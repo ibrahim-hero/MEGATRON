@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0e1526"><meta name="description" content="MEGATRON: an evidence-first autonomous engineering workbench.">
+  <title>MEGATRON · Mission Control</title>
+  <link rel="icon" href="/logo.svg" type="image/svg+xml"><link rel="manifest" href="/manifest.webmanifest"><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to workspace</a>
+  <aside class="sidebar" aria-label="Primary navigation">
+    <a class="wordmark" href="#/overview"><img src="/logo.svg" alt="" width="36" height="36"><span>MEGATRON<small>MISSION CONTROL</small></span></a>
+    <div class="workspace-label"><span class="workspace-dot"></span> Local workspace <span class="workspace-arrow">⌄</span></div>
+    <nav id="navigation">
+      <a href="#/overview" data-route="overview"><span class="nav-symbol">◈</span> Overview <span id="attention-count" class="nav-count"></span></a>
+      <a href="#/work" data-route="work"><span class="nav-symbol">▤</span> Work</a>
+      <a href="#/knowledge" data-route="knowledge"><span class="nav-symbol">◇</span> Knowledge</a>
+      <a href="#/workflows" data-route="workflows"><span class="nav-symbol">⇢</span> Workflows</a>
+      <div class="nav-section">SYSTEM</div>
+      <a href="#/models" data-route="models"><span class="nav-symbol">◎</span> Models & budgets</a>
+      <a href="#/benchmarks" data-route="benchmarks"><span class="nav-symbol">▥</span> Benchmarks</a>
+      <a href="#/integrations" data-route="integrations"><span class="nav-symbol">⊞</span> Integrations</a>
+      <a href="#/settings" data-route="settings"><span class="nav-symbol">⚙</span> Settings</a>
+    </nav>
+    <div class="sidebar-bottom"><div class="local-avatar">MG</div><div>Evidence-first engineering<small>v1.0 · self-hosted</small></div></div>
+  </aside>
+  <div class="shell">
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="page-name">Overview</strong></div><div class="top-actions"><button class="palette-trigger" data-action="palette">Search or jump to… <kbd>Ctrl K</kbd></button><button class="icon-button" data-action="theme" aria-label="Toggle color theme">◐</button><button class="icon-button" data-action="pause" aria-label="Pause processing" id="pause-button">Ⅱ</button><span class="health-dot" id="health" title="System status"></span></div></header>
+    <div class="mode-strip" id="mode-strip" hidden>DEMONSTRATION <span>Scripted model decisions. Real file changes, verification, checkpoints, and delivery.</span></div>
+    <main id="main" tabindex="-1"><div class="loading">Connecting to MEGATRON…</div></main>
+    <footer class="statusbar"><span><i></i> <span id="connection">Connected</span></span><span>Quiet by design. Evidence by default.</span><span id="footer-workers">Workers —</span></footer>
+  </div>
+  <dialog id="dialog"><div id="dialog-body"></div></dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

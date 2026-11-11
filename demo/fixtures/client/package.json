@@ -1,0 +1,1 @@
+{"name":"client-contract-fixture","private":true,"type":"module","scripts":{"test":"node --test test/client.test.js"}}

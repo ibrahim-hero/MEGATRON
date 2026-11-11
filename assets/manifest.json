@@ -1,0 +1,32 @@
+{
+  "product": "MEGATRON",
+  "generatedAt": "2026-11-11T17:22:03.445Z",
+  "source": "Actual running application with a declared scripted provider and executed verification",
+  "screenshots": [
+    {
+      "name": "mission-control",
+      "path": "screenshots/mission-control.png"
+    },
+    {
+      "name": "mission-timeline",
+      "path": "screenshots/mission-timeline.png"
+    },
+    {
+      "name": "verification",
+      "path": "screenshots/verification.png"
+    },
+    {
+      "name": "delivery-review",
+      "path": "screenshots/delivery-review.png"
+    },
+    {
+      "name": "project-knowledge",
+      "path": "screenshots/project-knowledge.png"
+    },
+    {
+      "name": "mobile-mission-control",
+      "path": "screenshots/mobile-mission-control.png"
+    }
+  ],
+  "video": "demo/megatron-walkthrough.webm"
+}
