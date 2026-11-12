@@ -1,6 +1,6 @@
 {
   "name": "megatron",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "MEGATRON — an evidence-first autonomous engineering workbench.",
   "type": "module",
   "license": "MIT",

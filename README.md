@@ -276,8 +276,8 @@ Build distributable archives:
 
 ```powershell
 npm.cmd run package
-# releases/MEGATRON-v1.0.0.zip
-# releases/megatron-mission-control-1.0.0.vsix
+# releases/MEGATRON-v1.1.0.zip
+# releases/megatron-mission-control-1.1.0.vsix
 # releases/SHA256SUMS.txt
 ```
 

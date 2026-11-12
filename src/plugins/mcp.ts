@@ -1,6 +1,7 @@
 import { spawn, type ChildProcessWithoutNullStreams } from 'node:child_process';
 import type { ToolSpec } from '../core/ports.ts';
 import type { MegatronSettings } from '../policy.ts';
+import { VERSION } from '../version.ts';
 type Server = MegatronSettings['mcp'][number];
 /** MCP JSON-RPC over stdio or Streamable HTTP, including native tool schemas. */
 export class McpClient {
@@ -20,7 +21,7 @@ export class McpClient {
       const failed = (e: Error) => { for (const p of this.pending.values()) { clearTimeout(p.timer); p.reject(e); } this.pending.clear(); };
       this.child.on('error', failed); this.child.on('exit', () => failed(new Error('MCP process exited')));
     }
-    await this.request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'MEGATRON', version: '1.0.0' } });
+    await this.request('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'MEGATRON', version: VERSION } });
     await this.notify('notifications/initialized', {});
     return this;
   }

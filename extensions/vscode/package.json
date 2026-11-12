@@ -1,6 +1,6 @@
 {
   "name":"megatron-mission-control","displayName":"MEGATRON Mission Control","description":"Inspect evidence-first agent missions, review changes, and decide delivery gates.",
-  "version":"1.0.0","publisher":"megatron","engines":{"vscode":"^1.95.0"},"license":"MIT",
+  "version":"1.1.0","publisher":"megatron","engines":{"vscode":"^1.95.0"},"license":"MIT",
   "categories":["Other"],"activationEvents":["onView:megatron.missions"],"main":"./extension.cjs",
   "contributes":{
     "viewsContainers":{"activitybar":[{"id":"megatron","title":"MEGATRON","icon":"icon.svg"}]},

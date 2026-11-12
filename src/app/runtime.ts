@@ -24,6 +24,7 @@ import { GithubSource, GithubDelivery, ghTransport } from '../sources/github.ts'
 import { FeishuChannel } from '../sources/feishu.ts';
 import { scenarios, scenarioSteps } from '../bench/scenarios.ts';
 import { key } from '../core/ids.ts';
+import { VERSION } from '../version.ts';
 import type { Ticket, Trigger, Sandbox, Approval } from '../core/ports.ts';
 import { fingerprint, safePath } from '../infra/files.ts';
 
@@ -176,7 +177,7 @@ export class Runtime {
   }
   overview() {
     const tickets = this.store.tickets.list().slice().reverse(); const needs = tickets.filter(t => t.stage === 'needs-you' || t.approvals.some(a => a.status === 'pending'));
-    return { product: 'MEGATRON', version: '1.0.0', mode: this.settings.current.models.every(m => m.provider === 'demo') ? 'demo' : 'live', paused: this.settings.current.policy.paused, tickets, needs, working: tickets.filter(t => ['working', 'queued', 'verifying'].includes(t.stage)), completed: tickets.filter(t => t.ended?.outcome === 'delivered').length, workers: { active: this.executor.activeCount, max: this.settings.current.executor.maxWorkers }, ledger: this.ledger.summary(), sources: this.sources.overview(), effects: this.store.effects.pending().filter(e => e.attempts >= 3).map(e => ({ kind: e.kind, error: e.lastError })), knowledge: { documents: this.store.list('document').length, facts: this.store.list('fact').length }, workflows: this.store.list('workflow') };
+    return { product: 'MEGATRON', version: VERSION, mode: this.settings.current.models.every(m => m.provider === 'demo') ? 'demo' : 'live', paused: this.settings.current.policy.paused, tickets, needs, working: tickets.filter(t => ['working', 'queued', 'verifying'].includes(t.stage)), completed: tickets.filter(t => t.ended?.outcome === 'delivered').length, workers: { active: this.executor.activeCount, max: this.settings.current.executor.maxWorkers }, ledger: this.ledger.summary(), sources: this.sources.overview(), effects: this.store.effects.pending().filter(e => e.attempts >= 3).map(e => ({ kind: e.kind, error: e.lastError })), knowledge: { documents: this.store.list('document').length, facts: this.store.list('fact').length }, workflows: this.store.list('workflow') };
   }
   async close() {
     if (this.closed) return; if (this.timer) clearInterval(this.timer); this.timer = undefined;

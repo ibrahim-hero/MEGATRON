@@ -46,7 +46,7 @@ def furniture(canvas, doc):
         canvas.setFillColor(BLUE);canvas.setFont(bold,9);canvas.drawString(114,729,'THE ENGINEERING WHALE')
         canvas.setFillColor(BLUE);canvas.setFont(bold,10);canvas.drawString(44,685,'PRODUCT · IMPLEMENTATION · UI / UX · OPERATIONS')
         canvas.setFillColor(INK);canvas.setFont(bold,26);canvas.drawString(44,630,'Less oversight. More outcomes.')
-        canvas.setFillColor(MUTED);canvas.setFont(body.fontName,11);canvas.drawString(44,604,'Evidence-first autonomous engineering. Version 1.0.0')
+        canvas.setFillColor(MUTED);canvas.setFont(body.fontName,11);canvas.drawString(44,604,'Evidence-first autonomous engineering. Version 1.1.0')
         image=ROOT/'assets/screenshots/mission-control.png'
         canvas.setFillColor(colors.white);canvas.roundRect(34,185,527,370,16,fill=1,stroke=0)
         if image.exists():canvas.drawImage(str(image),44,195,width=507,height=350,preserveAspectRatio=True,anchor='c',mask='auto')
@@ -57,7 +57,7 @@ def furniture(canvas, doc):
     else:
         canvas.setFillColor(MUTED);canvas.setFont(bold,8);canvas.drawString(42,808,'MEGATRON  /  PRODUCT AND OPERATING GUIDE')
         canvas.setStrokeColor(colors.HexColor('#d5ddeb'));canvas.line(42,798,553,798);canvas.line(42,38,553,38)
-        canvas.setFont(body.fontName,8);canvas.drawString(42,24,'v1.0.0 · Evidence-first engineering');canvas.drawRightString(553,24,str(doc.page))
+        canvas.setFont(body.fontName,8);canvas.drawString(42,24,'v1.1.0 · Evidence-first engineering');canvas.drawRightString(553,24,str(doc.page))
 
 story=[Spacer(1,1),PageBreak(),Paragraph('The plan, in runnable form.',h1),Paragraph('This guide combines product direction, the implemented capability ledger, the operating instructions, and the interface design. The original planning PDF is included separately as a historical reference; its targets are not presented as measured results.',body)]
 for i,(title,name) in enumerate([('Product and UI / UX','PRODUCT.md'),('Plan-to-code traceability','IMPLEMENTATION.md'),('How to use MEGATRON','USAGE.md'),('Architecture and recovery','ARCHITECTURE.md'),('Integrations','INTEGRATIONS.md'),('HTTP API','API.md'),('Testing and validation','TESTING.md')]):

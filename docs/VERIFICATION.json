@@ -1,6 +1,6 @@
 {
   "product": "MEGATRON",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "checkedOn": "2026-11-12",
   "environment": "Windows; Node.js 24.16.0; installed Microsoft Edge",
   "checks": [

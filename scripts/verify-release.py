@@ -1,8 +1,10 @@
 from pathlib import Path
 import json,zipfile,hashlib,xml.etree.ElementTree as ET
 root=Path(__file__).resolve().parent.parent
-release=root/'releases/MEGATRON-v1.0.0.zip'
-extension=root/'releases/megatron-mission-control-1.0.0.vsix'
+package=json.loads((root/'package.json').read_text())
+extension_package=json.loads((root/'extensions/vscode/package.json').read_text())
+release=root/f"releases/MEGATRON-v{package['version']}.zip"
+extension=root/f"releases/megatron-mission-control-{extension_package['version']}.vsix"
 for path in (release,extension):
     with zipfile.ZipFile(path) as archive:
         assert archive.testzip() is None

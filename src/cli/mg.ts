@@ -8,6 +8,7 @@ import { runBenchmark } from '../bench/runner.ts';
 import type { MegatronSettings, ModelConfig } from '../policy.ts';
 import type { WorkNode } from '../workflows/dag.ts';
 import { scenarios } from '../bench/scenarios.ts';
+import { VERSION } from '../version.ts';
 const help = `MEGATRON · evidence-first autonomous engineering
 
 Usage: node bin/mg.js <command> [arguments] [--state directory] [--json]
@@ -67,7 +68,7 @@ export async function runCli(argv: string[]) {
   await mkdir(state,{recursive:true});
   const runtime=await Runtime.create({stateDir:state,settings:flags.demo?demoSettings():undefined});let persistent=false;
   try {
-    if(command==='init'){print({stateDir:state,settings:runtime.settings.path,version:'1.0.0'});return;}
+    if(command==='init'){print({stateDir:state,settings:runtime.settings.path,version:VERSION});return;}
     if(command==='serve'){
       if(flags.demo&&!flags.empty&&!runtime.store.tickets.list().length){runtime.submitDemo('shop');runtime.submitDemo('question');}
       const instance=await startServer(runtime,{port:Number(flags.port??3082),host:String(flags.host??'127.0.0.1')});persistent=true;print({product:'MEGATRON',url:instance.url,stateDir:state,mode:runtime.overview().mode});
