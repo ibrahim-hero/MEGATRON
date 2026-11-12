@@ -7,10 +7,9 @@ function fixture(id: keyof typeof roots, title: string, path: string, test: stri
     steps: [
       { toolCalls: [{ name: 'read_file', args: { path: test } }] },
       { toolCalls: [{ name: 'read_file', args: { path } }] },
-      { toolCalls: [{ name: 'record_hypothesis', args: { cause: 'The implementation violates the checked boundary behavior.', experiment: `Run node --test ${test} before and after a focused change.`, observation: 'The host baseline has failing regression tests.' } }] },
+      { toolCalls: [{ name: 'record_hypothesis', args: { cause: 'The implementation violates the checked boundary behavior.', experiment: `Run node --test --test-isolation=none ${test} before and after a focused change.`, observation: 'The host baseline has failing regression tests.' } }] },
       { toolCalls: [{ name: 'write_file', args: { path, content: fixed } }] },
-      { toolCalls: [{ name: 'run_command', args: { command: `node --test ${test}` } }] },
-      { toolCalls: [{ name: 'report', args: { state: 'ready', summary: title + '. Requesting independent verification of the patched workspace.', checkpoint_plan: 'Reproduced failure\nInspected source and boundary tests\nApplied focused correction\nRan local checks', checkpoint_next: 'Independent verification and review' } }] },
+      { toolCalls: [{ name: 'report', args: { state: 'ready', summary: title + '. Requesting independent verification of the patched workspace.', checkpoint_plan: 'Read the failing acceptance boundary\nInspected the relevant source\nRecorded a falsifiable cause\nApplied the focused correction\nRequested host verification', checkpoint_next: 'Independent verification and review' } }] },
     ] };
 }
 export const scenarios: Record<string, DemoScenario> = {

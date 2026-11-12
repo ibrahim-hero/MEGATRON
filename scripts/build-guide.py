@@ -20,7 +20,7 @@ if (FONT / 'segoeui.ttf').exists():
 else:
     pdfmetrics.registerFontFamily('Body',normal='Helvetica',bold='Helvetica-Bold',italic='Helvetica-Oblique',boldItalic='Helvetica-BoldOblique')
     Body, Bold, Mono = 'Helvetica','Helvetica-Bold','Courier'
-INK = colors.HexColor('#17223b'); BLUE = colors.HexColor('#3450d6'); MUTED = colors.HexColor('#596784'); NAVY = colors.HexColor('#0e1526')
+INK = colors.HexColor('#17223b'); BLUE = colors.HexColor('#4d6bfe'); MUTED = colors.HexColor('#596784'); NAVY = colors.HexColor('#0e1526'); SKY = colors.HexColor('#f5f8ff'); PALE = colors.HexColor('#e9efff')
 body = ParagraphStyle('body',fontName='Body' if (FONT/'segoeui.ttf').exists() else 'Helvetica',fontSize=9.5,leading=14,textColor=INK,spaceAfter=6)
 bold = 'Bold' if (FONT/'segoeui.ttf').exists() else 'Helvetica-Bold'
 mono = 'Mono' if (FONT/'consola.ttf').exists() else 'Courier'
@@ -38,19 +38,22 @@ def inline(text):
 
 def furniture(canvas, doc):
     if doc.page==1:
-        canvas.setFillColor(NAVY);canvas.rect(0,0,A4[0],A4[1],fill=1,stroke=0)
-        canvas.setFillColor(colors.HexColor('#4d6bfe'));canvas.roundRect(42,731,51,51,12,fill=1,stroke=0)
-        canvas.setFillColor(colors.white);canvas.setFont(bold,30);canvas.drawString(51,741,'M')
-        canvas.setFont(bold,32);canvas.drawString(110,745,'MEGATRON')
-        canvas.setFillColor(colors.HexColor('#b8c7ed'));canvas.setFont(body.fontName,11);canvas.drawString(44,694,'PRODUCT · IMPLEMENTATION · UI / UX · OPERATIONS')
-        canvas.setFillColor(colors.white);canvas.setFont(bold,26);canvas.drawString(44,633,'Less oversight. More outcomes.')
-        canvas.setFillColor(colors.HexColor('#b8c7ed'));canvas.setFont(body.fontName,11);canvas.drawString(44,607,'Evidence-first autonomous engineering. Version 1.0.0')
+        canvas.setFillColor(SKY);canvas.rect(0,0,A4[0],A4[1],fill=1,stroke=0)
+        canvas.setFillColor(PALE);canvas.circle(518,752,170,fill=1,stroke=0)
+        mark=ROOT/'assets/brand/whale-mark.png'
+        if mark.exists():canvas.drawImage(str(mark),42,720,width=62,height=62,preserveAspectRatio=True,mask='auto')
+        canvas.setFillColor(INK);canvas.setFont(bold,32);canvas.drawString(112,746,'MEGATRON')
+        canvas.setFillColor(BLUE);canvas.setFont(bold,9);canvas.drawString(114,729,'THE ENGINEERING WHALE')
+        canvas.setFillColor(BLUE);canvas.setFont(bold,10);canvas.drawString(44,685,'PRODUCT · IMPLEMENTATION · UI / UX · OPERATIONS')
+        canvas.setFillColor(INK);canvas.setFont(bold,26);canvas.drawString(44,630,'Less oversight. More outcomes.')
+        canvas.setFillColor(MUTED);canvas.setFont(body.fontName,11);canvas.drawString(44,604,'Evidence-first autonomous engineering. Version 1.0.0')
         image=ROOT/'assets/screenshots/mission-control.png'
-        if image.exists():canvas.drawImage(str(image),44,199,width=507,height=350,preserveAspectRatio=True,anchor='c',mask='auto')
-        canvas.setFillColor(colors.HexColor('#e8a33d'));canvas.setFont(bold,10);canvas.drawString(44,155,'REAL SOURCE CHANGES. EXECUTED CHECKS. REVIEWABLE DELIVERY.')
-        canvas.setFillColor(colors.HexColor('#b8c7ed'));canvas.setFont(body.fontName,9);canvas.drawString(44,121,'The default demonstration is explicitly scripted; its execution and evidence are real.')
+        canvas.setFillColor(colors.white);canvas.roundRect(34,185,527,370,16,fill=1,stroke=0)
+        if image.exists():canvas.drawImage(str(image),44,195,width=507,height=350,preserveAspectRatio=True,anchor='c',mask='auto')
+        canvas.setFillColor(BLUE);canvas.setFont(bold,10);canvas.drawString(44,150,'REAL SOURCE CHANGES. EXECUTED CHECKS. REVIEWABLE DELIVERY.')
+        canvas.setFillColor(MUTED);canvas.setFont(body.fontName,9);canvas.drawString(44,116,'The default demonstration is explicitly scripted; its execution and evidence are real.')
         canvas.drawString(44,106,'Use a configured provider to measure live engineering performance on the same tasks.')
-        canvas.setFillColor(colors.HexColor('#7587af'));canvas.setFont(body.fontName,8);canvas.drawString(44,47,'Prepared for MEGATRON · source, documentation, screenshots, demo, and installable extension')
+        canvas.setFillColor(colors.HexColor('#7587af'));canvas.setFont(body.fontName,8);canvas.drawString(44,47,'MEGATRON · The engineering whale · source, screenshots, demo, PDF, and extension')
     else:
         canvas.setFillColor(MUTED);canvas.setFont(bold,8);canvas.drawString(42,808,'MEGATRON  /  PRODUCT AND OPERATING GUIDE')
         canvas.setStrokeColor(colors.HexColor('#d5ddeb'));canvas.line(42,798,553,798);canvas.line(42,38,553,38)

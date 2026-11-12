@@ -58,7 +58,7 @@ Optional extras:
 Verify the checkout before you trust it:
 
 ```powershell
-npm.cmd run check        # typecheck + 39 unit tests
+npm.cmd run check        # typecheck + 41 unit tests
 node demo/run-demo.mjs   # full end-to-end demonstration
 ```
 
@@ -254,12 +254,12 @@ Measured rollout checks and declared rollback actions are available through depl
 ## Verify it
 
 ```powershell
-npm.cmd run check                                  # typecheck + 39 unit tests
+npm.cmd run check                                  # typecheck + 41 unit tests
 npm.cmd run test:e2e                               # 6 real browser journeys
 node bin/mg.js bench --demo --state tools/bench --json
 ```
 
-The recorded run passed **39 unit tests**, **6 browser scenarios**, **5/5 positive regression fixtures**, and the false-ready rejection (see [docs/VERIFICATION.json](docs/VERIFICATION.json)). The default scorecard measures the *harness* with declared scripts; use `bench --live` to measure your configured models on the same fixtures.
+The recorded run passed **41 unit tests**, **6 isolated browser scenarios**, **5/5 positive regression fixtures**, and the false-ready rejection (see [docs/VERIFICATION.json](docs/VERIFICATION.json)). The default scorecard measures the *harness* with declared scripts; use `bench --live` to measure your configured models on the same fixtures.
 
 ---
 
@@ -285,6 +285,6 @@ npm.cmd run package
 
 ## Design lineage
 
-Inspired by the explicit domain model and attention philosophy of [dsh-superagent-prototype](https://github.com/ibrahim-hero/dsh-superagent-prototype). MEGATRON is an independent implementation with its own runtime and branding. It does not require DeepSeek Harness packages.
+Inspired by the explicit domain model and attention philosophy of [dsh-superagent-prototype](https://github.com/ibrahim-hero/dsh-superagent-prototype). MEGATRON is an independent implementation with its own runtime and branding. It does not require DeepSeek Harness packages. The whale-tail silhouette used in the brand mark is adapted from [Game-Icons.net](https://game-icons.net/) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/); see [asset attribution](assets/brand/ATTRIBUTION.txt).
 
 MIT license. See [LICENSE](LICENSE).

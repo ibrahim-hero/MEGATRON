@@ -29,7 +29,7 @@ import { fingerprint, safePath } from '../infra/files.ts';
 
 export function demoSettings(): MegatronSettings {
   const s = structuredClone(DEFAULT_SETTINGS);
-  for (const scenario of Object.values(scenarios)) s.repositories[scenario.repository] = { path: scenario.root, verify: [{ id: scenario.id, label: scenario.title, command: `node --test ${scenario.test}`, timeoutMs: 30000, regression: true }], trustedTests: [scenario.test, 'package.json'] };
+  for (const scenario of Object.values(scenarios)) s.repositories[scenario.repository] = { path: scenario.root, verify: [{ id: scenario.id, label: scenario.title, command: `node --test --test-isolation=none ${scenario.test}`, timeoutMs: 30000, regression: true }], trustedTests: [scenario.test, 'package.json'] };
   return s;
 }
 export class Runtime {

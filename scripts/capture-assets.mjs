@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { Runtime, demoSettings } from '../src/app/runtime.ts';
 import { startServer } from '../src/app/server.ts';
 const out=resolve('assets/screenshots');await mkdir(out,{recursive:true});
@@ -17,6 +18,8 @@ try{
   await page.getByRole('button',{name:'Review delivery',exact:true}).click();await page.waitForSelector('dialog[open]');await page.waitForTimeout(2000);await save('delivery-review');await page.getByTestId('approve-delivery').click();await runtime.waitTicket(id);
   await page.goto(`${server.url}/#/knowledge`);await page.getByLabel('Search project knowledge').fill('checkout total');await page.getByRole('button',{name:'Search',exact:true}).click();await page.waitForSelector('.fact');await save('project-knowledge');
   await page.setViewportSize({width:390,height:844});await page.goto(server.url);await page.waitForSelector('.mission-card');await save('mobile-mission-control');
-  await writeFile(resolve('assets/manifest.json'),JSON.stringify({product:'MEGATRON',generatedAt:new Date().toISOString(),source:'Actual running application with a declared scripted provider and executed verification',screenshots,video:'demo/megatron-walkthrough.webm'},null,2));
+  const mark=await context.newPage();await mark.setViewportSize({width:512,height:512});await mark.goto(`${server.url}/logo.svg`);await mark.locator('svg').screenshot({path:resolve('assets/brand/whale-mark.png'),omitBackground:true});
+  const social=await context.newPage();await social.setViewportSize({width:1600,height:640});await social.goto(pathToFileURL(resolve('assets/brand/social-card.svg')).href);await social.screenshot({path:resolve('assets/brand/social-card.png')});
+  await writeFile(resolve('assets/manifest.json'),JSON.stringify({product:'MEGATRON',brand:'The engineering whale',generatedAt:new Date().toISOString(),source:'Actual running application with a declared scripted provider and executed verification',branding:['brand/whale.svg','brand/whale-mark.png','brand/logo-lockup.svg','brand/social-card.svg','brand/social-card.png'],screenshots,video:'demo/megatron-walkthrough.webm'},null,2));
   console.log(`Captured ${screenshots.length} application screenshots under ${out}`);
 }finally{await context.close();await browser.close();await server.close();}

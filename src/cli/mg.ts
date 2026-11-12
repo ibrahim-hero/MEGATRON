@@ -39,7 +39,7 @@ declared scripts with real source edits and executed verification commands.
 `;
 function parse(argv: string[]) {
   const args: string[] = []; const flags: Record<string, string | boolean> = {};
-  const bools = new Set(['json','demo','live','help','auto-approve']);
+  const bools = new Set(['json','demo','live','help','auto-approve','empty']);
   for(let i=0;i<argv.length;i++) if(argv[i].startsWith('--')) { const key=argv[i].slice(2); flags[key]=bools.has(key)?true:argv[++i]??''; } else args.push(argv[i]);
   return {args,flags};
 }
@@ -69,7 +69,7 @@ export async function runCli(argv: string[]) {
   try {
     if(command==='init'){print({stateDir:state,settings:runtime.settings.path,version:'1.0.0'});return;}
     if(command==='serve'){
-      if(flags.demo&&!runtime.store.tickets.list().length){runtime.submitDemo('shop');runtime.submitDemo('question');}
+      if(flags.demo&&!flags.empty&&!runtime.store.tickets.list().length){runtime.submitDemo('shop');runtime.submitDemo('question');}
       const instance=await startServer(runtime,{port:Number(flags.port??3082),host:String(flags.host??'127.0.0.1')});persistent=true;print({product:'MEGATRON',url:instance.url,stateDir:state,mode:runtime.overview().mode});
       const stop=()=>instance.close().then(()=>process.exit(0));process.once('SIGINT',stop);process.once('SIGTERM',stop);return;
     }

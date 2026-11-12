@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { createHmac, randomUUID, timingSafeEqual } from 'node:crypto';
 import type { Runtime } from './runtime.ts';
-import { runBenchmark } from '../bench/runner.ts';
+import { runBenchmark, benchmarkCases } from '../bench/runner.ts';
 import { diffTrees } from '../infra/files.ts';
 import { feishuTrigger } from '../sources/feishu.ts';
 import { scenarios } from '../bench/scenarios.ts';
@@ -95,8 +95,10 @@ export async function startServer(runtime: Runtime, options: { port?: number; ho
         if (path === '/api/benchmarks') {
           const models = data.live ? runtime.settings.current.models.filter(m => m.provider !== 'demo') : undefined;
           if (models && !models.length) throw new Error('Configure a real model route before requesting a live benchmark');
+          const cases = Array.isArray(data.cases) ? benchmarkCases.filter(c => data.cases.includes(c.id)) : undefined;
+          if (Array.isArray(data.cases) && (!cases || !cases.length)) throw new Error('No matching benchmark cases were requested');
           const id = randomUUID(); runtime.store.save('benchmark', id, { id, status: 'running', at: new Date().toISOString() });
-          const job = runBenchmark(join(runtime.stateDir, 'benchmarks', id), { models }).then(report => { runtime.store.save('benchmark', id, { ...report, id, status: 'completed' }); }).catch(e => { runtime.store.save('benchmark', id, { id, status: 'failed', error: String(e) }); });
+          const job = runBenchmark(join(runtime.stateDir, 'benchmarks', id), { models, cases }).then(report => { runtime.store.save('benchmark', id, { ...report, id, status: 'completed' }); }).catch(e => { runtime.store.save('benchmark', id, { id, status: 'failed', error: String(e) }); });
           runtime.track(job); send(res, 202, { id }); return;
         }
         if (path === '/api/skills/propose') { send(res, 201, runtime.skills.propose(runtime.engine.require(String(data.ticketId)), data.name)); return; }

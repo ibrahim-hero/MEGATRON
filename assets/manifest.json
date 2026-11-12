@@ -1,7 +1,15 @@
 {
   "product": "MEGATRON",
-  "generatedAt": "2026-11-11T17:22:03.445Z",
+  "brand": "The engineering whale",
+  "generatedAt": "2026-11-12T02:49:09.937Z",
   "source": "Actual running application with a declared scripted provider and executed verification",
+  "branding": [
+    "brand/whale.svg",
+    "brand/whale-mark.png",
+    "brand/logo-lockup.svg",
+    "brand/social-card.svg",
+    "brand/social-card.png"
+  ],
   "screenshots": [
     {
       "name": "mission-control",

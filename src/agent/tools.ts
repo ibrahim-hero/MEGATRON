@@ -4,6 +4,7 @@ import { files, safePath, writeWorkspace } from '../infra/files.ts';
 import type { KnowledgeIndex } from '../knowledge/index.ts';
 import type { PluginRegistry } from '../plugins/registry.ts';
 import { validateArguments } from '../plugins/schema.ts';
+import { directCommand } from '../infra/process.ts';
 const object = (properties: Record<string, unknown>, required: string[] = []) => ({ type: 'object', properties, required, additionalProperties: false });
 const str = { type: 'string', maxLength: 200000 };
 export const WORKER_TOOLS: ToolSpec[] = [
@@ -32,7 +33,7 @@ export async function execTool(ctx: ToolCtx, name: string, args: Record<string, 
         if (ctx.allowedFiles?.length && !ctx.allowedFiles.some(p => p === '*' || path === p || path.startsWith(p.replace(/\*$/, '')))) throw new Error('File is outside this subtask contract');
         await writeWorkspace(ctx.workspace, path, String(args.content)); return { ok: true, text: `Wrote ${path}` };
       }
-      case 'run_command': { const r = await ctx.sandbox.run(ctx.workspace, String(args.command), { timeoutMs: Math.min(Number(args.timeout_ms ?? 60000), 120000), signal: ctx.signal }); return { ok: r.exitCode === 0, text: `Exit ${r.exitCode}\n${r.stdout}\n${r.stderr}`.slice(-12000) }; }
+      case 'run_command': { const r = await ctx.sandbox.run(ctx.workspace, directCommand(String(args.command)), { timeoutMs: Math.min(Number(args.timeout_ms ?? 60000), 120000), signal: ctx.signal }); return { ok: r.exitCode === 0, text: `Exit ${r.exitCode}\n${r.stdout}\n${r.stderr}`.slice(-12000) }; }
       case 'search_code': { const matches: string[] = []; for (const p of await files(ctx.workspace)) { try { const text = await readFile(await safePath(ctx.workspace, p), 'utf8'); text.split('\n').forEach((l, i) => { if (l.includes(String(args.query))) matches.push(`${p}:${i + 1}: ${l}`); }); } catch {} } return { ok: true, text: matches.slice(0, 60).join('\n').slice(0, 12000) }; }
       case 'knowledge_search': return { ok: true, text: JSON.stringify(await ctx.knowledge?.search(String(args.query), ctx.repository) ?? []) };
       case 'record_hypothesis': ctx.onHypothesis?.(args); return { ok: true, text: 'Hypothesis and observed experiment recorded' };

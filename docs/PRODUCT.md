@@ -4,7 +4,7 @@
 
 MEGATRON’s Mission Control turns attention economics into an interface. The first question is: **does any work need me?** The second is: **what evidence makes this result usable?** Technical internals stay inspectable without becoming the default reading burden.
 
-The visual system uses a deep navy canvas, restrained blue primary actions, amber decision states, green verified outcomes, and red failures. Typography uses system sans-serif text with monospaced IDs, commands, fingerprints, and output. Cards have consistent borders and spacing; modal elevation is reserved for concrete decisions.
+The visual system is light-first and ocean-inspired: an airy blue-and-white canvas, a whale-tail MEGATRON mark, cobalt primary actions, amber decision states, green verified outcomes, and red failures. Typography uses system sans-serif text with monospaced IDs, commands, fingerprints, and output. Cards have consistent borders and spacing; modal elevation is reserved for concrete decisions. A complete dark theme retains the same semantic state colors.
 
 ## Screens
 
@@ -32,7 +32,7 @@ The visual system uses a deep navy canvas, restrained blue primary actions, ambe
 
 ## Product assets
 
-The shipped screenshots are taken from the actual running application, including real verification receipts and an approval-bound patch. The walkthrough video follows that same application. Demo mode is prominently labeled so a scripted provider is never represented as live intelligence.
+The shipped whale mark, wordmark, social card, screenshots, and mobile captures form one consistent MEGATRON brand system. Screenshots are taken from the actual running application, including real verification receipts and an approval-bound patch. The walkthrough video follows that same application. Demo mode is prominently labeled so a scripted provider is never represented as live intelligence. Asset licensing and adaptation details are recorded under `assets/brand/ATTRIBUTION.txt`.
 
 The VS Code extension lists the same missions, renders script-free change review, and stores optional server tokens in SecretStorage. The mobile web manifest supplies a home-screen app surface backed by the same API.
 

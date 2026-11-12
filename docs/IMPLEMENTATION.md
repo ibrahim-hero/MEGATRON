@@ -15,7 +15,7 @@ This is the implementation ledger for the original product plan. Each row names 
 | Routing/speculation | `model-router.ts`; independent candidate runs | Capability selection; observed failures; actual failing/passing candidate comparison |
 | Learning | `src/skills/learning.ts`; candidate → holdout → published | Training contamination refusal; clean two-task holdout; provenance retained |
 | Multi-repo outcomes | Workflow scopes; dependency artifacts; rollout service | Backend/client fixture migration; declared health measurements and rollback receipts |
-| Product surfaces | `mg`; `web`; VS Code extension; mobile manifest | CLI smoke; five browser journeys; 390px layout; installable extension packaging |
+| Product surfaces | `mg`; `web`; VS Code extension; mobile manifest | CLI smoke; six isolated browser journeys; 390px layout; installable extension packaging |
 
 ## Additional improvements carried through
 

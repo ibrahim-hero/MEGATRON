@@ -10,7 +10,7 @@ for path in (release,extension):
         assert not any('/tools/' in n or n.startswith('tools/') or n.endswith('.sqlite') or n.endswith('/.env') for n in names)
         if path==release:
             assert json.loads(archive.read('package.json'))['name']=='megatron'
-            for item in ('src/engine.ts','web/app.js','docs/MEGATRON-Product-Guide.pdf','assets/screenshots/mission-control.png','assets/demo/megatron-walkthrough.webm','tests/foundation.test.ts'):assert item in names,item
+            for item in ('src/engine.ts','web/app.js','docs/MEGATRON-Product-Guide.pdf','assets/screenshots/mission-control.png','assets/demo/megatron-walkthrough.webm','assets/brand/whale.svg','assets/brand/whale-mark.png','assets/brand/social-card.png','assets/brand/ATTRIBUTION.txt','tests/foundation.test.ts'):assert item in names,item
         else:
             assert json.loads(archive.read('extension/package.json'))['name']=='megatron-mission-control'
             ET.fromstring(archive.read('extension.vsixmanifest'))

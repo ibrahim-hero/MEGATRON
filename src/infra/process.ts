@@ -2,6 +2,13 @@ import { spawn } from 'node:child_process';
 import { mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { RunResult } from '../core/ports.ts';
+/** Bypass shell wrappers for ordinary executable calls; retain shell mode for operators, pipes and quoting. */
+export function directCommand(command: string): string | string[] {
+  const text = command.trim();
+  if (!text || /[&|<>^"'`$();]/.test(text)) return command;
+  const parts = text.split(/\s+/);
+  return parts.every(part => /^[\w@%+=:,./\\-]+$/.test(part)) ? parts : command;
+}
 export async function runProcess(cwd: string, command: string | string[], opts: { timeoutMs?: number; signal?: AbortSignal; env?: Record<string, string>; inheritEnv?: boolean } = {}): Promise<RunResult> {
   const start = Date.now(); const temp = join(cwd, '.tmp'); await mkdir(temp, { recursive: true });
   const inherited = Object.fromEntries(Object.entries(process.env).filter(([k, v]) => k !== 'NODE_TEST_CONTEXT' && v !== undefined && (opts.inheritEnv || !/(TOKEN|KEY|SECRET|PASSWORD|COOKIE|CREDENTIAL)/i.test(k))));
@@ -11,7 +18,7 @@ export async function runProcess(cwd: string, command: string | string[], opts: 
   const args = shell ? (process.platform === 'win32' ? ['/d', '/s', '/c', command] : ['-lc', command]) : command.slice(1);
   return new Promise(resolve => {
     let settled = false; let stdout = ''; let stderr = ''; let forcedCode: number | undefined; let termination = Promise.resolve();
-    const child = spawn(program, args, { cwd, env, detached: process.platform !== 'win32', windowsHide: true });
+    const child = spawn(program, args, { cwd, env, detached: process.platform !== 'win32', windowsHide: true, stdio: ['ignore', 'pipe', 'pipe'] });
     const finish = (code: number) => { if (settled) return; settled = true; clearTimeout(timer); opts.signal?.removeEventListener('abort', abort); resolve({ exitCode: code, stdout, stderr, durationMs: Date.now() - start }); };
     const kill = (): Promise<void> => {
       if (!child.pid) return Promise.resolve();
